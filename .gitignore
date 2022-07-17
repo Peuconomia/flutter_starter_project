@@ -49,3 +49,7 @@ app.*.map.json
 # TODO: Remove android and ios from here
 android/
 ios/
+web/
+macos/
+windows/
+linux/
