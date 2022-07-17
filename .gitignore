@@ -45,6 +45,11 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+# Firebase-specific
+firebase_options.dart
+google-services.json
+firebase_app_id_file.json
+
 
 # TODO: Remove android and ios from here
 android/
