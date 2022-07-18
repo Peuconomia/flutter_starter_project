@@ -51,8 +51,15 @@ dependencies:
   firebase_database: ^9.0.8
   firebase_remote_config: ^2.0.2
 
-  # freezed
+  # local notifications
+  flutter_local_notifications: ^9.7.0
+
+  # annotations
   freezed_annotation: ^2.1.0
+  json_annotation: ^4.6.0
+
+  # Equatable
+  equatable: ^2.0.3
 
   # bloc
   flutter_bloc: ^8.0.1
@@ -82,7 +89,21 @@ dependencies:
 
   # widgets
   smooth_page_indicator: ^1.0.0+2
+  carousel_slider: ^4.1.1
+  flutter_staggered_grid_view: ^0.6.2
   cached_network_image: ^3.2.1
+  webview_flutter: ^3.0.4
+  shimmer: ^2.0.0
+
+  # native splash screens
+  flutter_native_splash: ^2.2.5
+
+  # url launcher
+  url_launcher: ^6.1.5
+
+  # media players
+  video_player: ^2.4.5
+  audioplayers: ^1.0.1
 
   # svg support
   flutter_svg: ^1.1.1+1
@@ -92,6 +113,24 @@ dependencies:
 
   # secure local storage
   flutter_secure_storage: ^5.0.2
+
+  # dependency_injections
+  get_it: ^7.2.0
+  injectable: ^1.5.3
+
+  # plus packages
+  package_info_plus: ^1.4.2
+  device_info_plus: ^4.0.0
+
+  # connectivity test
+  internet_connection_checker: ^0.0.1+4
+
+  # location
+  geolocator: ^9.0.1
+
+  # device preview
+  device_preview: ^1.1.0
+
 
 dev_dependencies:
   flutter_test:
@@ -117,6 +156,14 @@ dev_dependencies:
 
   # freezed
   freezed: ^2.1.0+1
+
+  # json serialization
+  json_serializable: ^6.3.1
+
+  # generators
+  injectable_generator: ^1.5.4
+
+  # build runner
   build_runner: ^2.1.8
 
 
