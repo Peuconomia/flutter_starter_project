@@ -1,0 +1,13 @@
+# pre-existing lines - do not add this to your files
+
+sdk.dir=/home/saurav/Android/Sdk
+flutter.sdk=/home/saurav/fvm/versions/X.X.X
+flutter.buildMode=debug
+flutter.versionName=X.X.XX
+flutter.versionCode=XX
+
+# Add these three lines below and update the sdk versions from here only
+
+flutter.minSdkVersion=24
+flutter.targetSdkVersion=32
+flutter.compileSdkVersion=33
