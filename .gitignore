@@ -50,6 +50,8 @@ firebase_options.dart
 google-services.json
 firebase_app_id_file.json
 
+# Android specific files
+*.jks
 
 # TODO: Remove android and ios from here
 /android/
