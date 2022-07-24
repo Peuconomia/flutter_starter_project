@@ -47,7 +47,7 @@ class ConfigReaderImpl implements ConfigReader {
   @override
   bool get isDevicePreviewEnabled {
     if (_config == null) {
-      return true;
+      return false;
     }
     return _config?['is_device_preview_enabled'] as bool? ?? false;
   }
