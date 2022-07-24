@@ -66,7 +66,7 @@ The main changes needed are as follows:
 4. Update `pubspec.yaml` file.
 5. Setup Android Project configurations (OPTIONAL).
 
-###2.1 Clone the Repository
+### 2.1 Clone the Repository
 
 Clone the repository to your local directory using below command.
 
@@ -109,7 +109,7 @@ The final command then becomes as below:
 flutter create . --org come.peuconomia.notebook --project-name app -t app --platforms ios,android,web -i swift -a kotlin
 ```
 
-**NOTE:** Check whole configuraton options for `flutter create` using `flutter create --help` command.
+> **NOTE:** Check whole configuraton options for `flutter create` using `flutter create --help` command.
 
 ### 2.4 Update `pubspec.yaml` file.
 
@@ -140,7 +140,7 @@ flutter.targetSdkVersion=32
 flutter.compileSdkVersion=33
 ```
 
-*NOTE:* DO NOT edit anything in `local.properties` except adding the above lines. Other changes will be overwritten by FLUTTER.
+> **NOTE:** DO NOT edit anything in `local.properties` except adding the above lines. Other changes will be overwritten by FLUTTER.
 
 #### 2.5.2 `keystore.properties` file setup
 
@@ -365,6 +365,9 @@ Now, for final steps, remove the whole `buildTypes` code block and add the below
 ```groovy
 buildTypes {
     release {
+        minifyEnabled true
+        shrinkResources true
+        proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         signingConfig signingConfigs.release
     }
 
@@ -500,6 +503,9 @@ android {
 
     buildTypes {
         release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
 
@@ -518,6 +524,58 @@ dependencies {
 }
 
 ```
+
+> **NOTE: ** Add a file named `proguard-rules.pro` empty file inside `./android/app/` folder. 
+> **LOCATION:** `./android/app/proguard-rules.pro` 
+
+## 3. Run your app
+
+To run your app, execute the below commands for each platform:
+
+**FOR ANDROID:**
+```bash
+flutter run android
+```
+
+**FOR iOS:**
+```bash
+flutter run ios
+```
+
+
+## 4. Building your application
+
+To build your application, we have below options:
+
+### 4.1 Building Android application
+
+**For DEBUG APK:**
+```
+flutter build apk --debug
+```
+
+**For RELEASE APK:**
+```
+flutter build apk --obfuscate --split-debug-info=./build/debug-symbols/
+```
+
+**For RELEASE BUNDLE:**
+```
+flutter build appbundle --obfuscate --split-debug-info=./build/debug-symbols/
+```
+
+For more information, go to this [LINK](https://docs.flutter.dev/deployment/android) for building and releasing an android application.
+
+### 4.2 Building iOS application
+
+**LINK:** Unfortunately, iOS build process cannot be summarized in few lines. So, please look into this [LINK](https://docs.flutter.dev/deployment/ios) for building and releasing an iOS application.
+
+## 5. Conclusion
+
+If you followed everything properly, your project is now setup properly. Now, you can continue to build you Flutter Application with ease.
+
+Thank you for your time into looking in this `flutter_starter_project` template.
+
 
 
 
