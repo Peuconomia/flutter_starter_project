@@ -1,0 +1,5 @@
+{
+  "is_device_preview_enabled": false,
+  "base_url": "https://my.app",
+  "api_path": "/v2"
+}
