@@ -85,7 +85,7 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   # responsive ui builder
-  flutter_responsive_builder: ^0.0.1
+  responsive_builder: ^0.4.2
 
   # widgets
   smooth_page_indicator: ^1.0.0+2
