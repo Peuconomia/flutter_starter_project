@@ -185,6 +185,7 @@ flutter:
     - assets/images/splash/
     - assets/images/splash-v31/
     - assets/svgs/
+    - configs/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
