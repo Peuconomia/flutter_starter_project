@@ -63,3 +63,9 @@ firebase_app_id_file.json
 
 # Project specific app-configs
 /configs/*.json
+
+# Project specific ignores
+injections.config.dart
+*.g.dart
+*.freezed.dart
+*.gr.dart
