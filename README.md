@@ -170,6 +170,356 @@ Location: `./android/_keystore` in your flutter project root folder.
 
 After that, update the following fields, namely `releaseStorePassword`, `releaseKeyAlias`,  `releaseKeyPassword`, `debugStorePassword`, `debugKeyAlias` and `debugKeyPassword`, in the `keystore.properties` file with your store information.
 
+#### 2.5.4 Update `build.gradle` file
+
+We need to integrate the `keystore.properties` and `local.properties` files in our android build process by updating the `android/app/build.gradle` file with our configurations.
+
+First of all, replace the below lines with the new lines provided below.
+
+**EXISTING CODE:**
+```groovy
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterRoot = localProperties.getProperty('flutter.sdk')
+if (flutterRoot == null) {
+    throw new FileNotFoundException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+```
+
+**REPLACEMENT CODE:**
+```groovy
+// region - local.properties configuration
+// START: local.properties configuration
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+} else {
+    throw new GradleException("local.properties files is not found. Please set up the file correctly and try again.")
+}
+
+def flutterRoot = localProperties.getProperty('flutter.sdk')
+if (flutterRoot == null) {
+    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+def flutterMinSdkVersion = localProperties.getProperty('flutter.minSdkVersion')
+if (flutterMinSdkVersion == null) {
+    flutterMinSdkVersion = '23'
+}
+
+def flutterTargetSdkVersion = localProperties.getProperty('flutter.targetSdkVersion')
+if (flutterTargetSdkVersion == null) {
+    flutterTargetSdkVersion = '32'
+}
+
+def flutterCompileSdkVersion = localProperties.getProperty('flutter.compileSdkVersion')
+if (flutterCompileSdkVersion == null) {
+    flutterCompileSdkVersion = '33'
+}
+// END: local.properties configuration
+// endregion
+
+// region - keystore.properties configuration
+// START: keystore.properties configuration
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('keystore.properties')
+if (keystorePropertiesFile.exists()) {
+    keystorePropertiesFile.withReader('UTF-8') { reader ->
+        keystoreProperties.load(reader)
+    }
+} else {
+    throw new GradleException("keystore.properties files is not found. Please set up the file correctly using keystore.properties.example file and try again.")
+}
+
+def releaseStoreFile = keystoreProperties.getProperty('releaseStoreFile')
+def releaseStorePassword = keystoreProperties.getProperty('releaseStorePassword')
+def releaseKeyAlias = keystoreProperties.getProperty('releaseKeyAlias')
+def releaseKeyPassword = keystoreProperties.getProperty('releaseKeyPassword')
+
+def debugStoreFile = keystoreProperties.getProperty('debugStoreFile')
+def debugStorePassword = keystoreProperties.getProperty('debugStorePassword')
+def debugKeyAlias = keystoreProperties.getProperty('debugKeyAlias')
+def debugKeyPassword = keystoreProperties.getProperty('debugKeyPassword')
+// END: keystore.properties configuration
+// endregion
+```
+
+After adding above codes, the `keystore.properties` and `local.properties` files are both integrated to `build.gralde` file.
+
+Now, we need to apply those changes everywhere the default config is being used.
+
+In the `build.gradle` file, there is a `android` block that looks like below:
+
+```groovy
+...
+
+android {
+
+
+}
+```
+
+Now, inside the `android` block, add the below line or replace the existing `compileSdkVersion` with the one provided below.
+
+```groovy
+compileSdkVersion flutterCompileSdkVersion.toInteger()
+```
+
+Similarly, there is also a `defaultConfig` block that has the below codes:
+
+```groovy
+...
+
+android {
+    ...
+
+    defaultConfig {
+        ...
+        minSdkVersion 21
+        targetSdkVersion 32
+        ...
+    }
+
+
+}
+```
+
+Replace the above `minSdkVersion` and `targetSdkVersion` with the below lines:
+
+```groovy
+minSdkVersion flutterMinSdkVersion.toInteger()
+targetSdkVersion flutterTargetSdkVersion.toInteger()
+```
+
+Now, the file would look something like this.
+
+```groovy
+...
+
+android {    
+    ...
+    compileSdkVersion flutterCompileSdkVersion.toInteger()
+
+    defaultConfig {
+        ...
+        minSdkVersion flutterMinSdkVersion.toInteger()
+        targetSdkVersion flutterTargetSdkVersion.toInteger()
+        ...
+    }
+
+
+}
+```
+
+Now, we still need to add the signing configuration to the `build.gradle` file. Add the below lines inside the `android` block.
+
+```groovy
+signingConfigs {
+    release {
+        storeFile rootProject.file(releaseStoreFile)
+        storePassword  releaseStorePassword
+        keyAlias releaseKeyAlias
+        keyPassword  releaseKeyPassword
+    }
+
+    debug {
+        storeFile rootProject.file(debugStoreFile)
+        storePassword  debugStorePassword
+        keyAlias debugKeyAlias
+        keyPassword  debugKeyPassword
+    }
+}
+```
+
+Now, for final steps, remove the whole `buildTypes` code block and add the below lines:
+
+```groovy
+buildTypes {
+    release {
+        signingConfig signingConfigs.release
+    }
+
+    debug {
+        signingConfig signingConfigs.debug
+    }
+}
+```
+
+Now, the final files would look something like this. 
+
+**FINAL RESULT: Only consider the changes we made above. Other things will be according to your project configuraiton.**
+
+```groovy
+// region - local.properties configuration
+// START: local.properties configuration
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+} else {
+    throw new GradleException("local.properties files is not found. Please set up the file correctly and try again.")
+}
+
+def flutterRoot = localProperties.getProperty('flutter.sdk')
+if (flutterRoot == null) {
+    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+def flutterMinSdkVersion = localProperties.getProperty('flutter.minSdkVersion')
+if (flutterMinSdkVersion == null) {
+    flutterMinSdkVersion = '23'
+}
+
+def flutterTargetSdkVersion = localProperties.getProperty('flutter.targetSdkVersion')
+if (flutterTargetSdkVersion == null) {
+    flutterTargetSdkVersion = '32'
+}
+
+def flutterCompileSdkVersion = localProperties.getProperty('flutter.compileSdkVersion')
+if (flutterCompileSdkVersion == null) {
+    flutterCompileSdkVersion = '33'
+}
+// END: local.properties configuration
+// endregion
+
+// region - keystore.properties configuration
+// START: keystore.properties configuration
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('keystore.properties')
+if (keystorePropertiesFile.exists()) {
+    keystorePropertiesFile.withReader('UTF-8') { reader ->
+        keystoreProperties.load(reader)
+    }
+} else {
+    throw new GradleException("keystore.properties files is not found. Please set up the file correctly using keystore.properties.example file and try again.")
+}
+
+def releaseStoreFile = keystoreProperties.getProperty('releaseStoreFile')
+def releaseStorePassword = keystoreProperties.getProperty('releaseStorePassword')
+def releaseKeyAlias = keystoreProperties.getProperty('releaseKeyAlias')
+def releaseKeyPassword = keystoreProperties.getProperty('releaseKeyPassword')
+
+def debugStoreFile = keystoreProperties.getProperty('debugStoreFile')
+def debugStorePassword = keystoreProperties.getProperty('debugStorePassword')
+def debugKeyAlias = keystoreProperties.getProperty('debugKeyAlias')
+def debugKeyPassword = keystoreProperties.getProperty('debugKeyPassword')
+// END: keystore.properties configuration
+// endregion
+
+apply plugin: 'com.android.application'
+// START: FlutterFire Configuration
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.firebase-perf'
+apply plugin: 'com.google.firebase.crashlytics'
+// END: FlutterFire Configuration
+apply plugin: 'kotlin-android'
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+
+android {
+    compileSdkVersion flutterCompileSdkVersion.toInteger()
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    defaultConfig {
+        applicationId "come.peuconomia.notebook.app"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-build-configuration.
+        minSdkVersion flutterMinSdkVersion.toInteger()
+        targetSdkVersion flutterTargetSdkVersion.toInteger()
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+    }
+
+    signingConfigs {
+        release {
+            storeFile rootProject.file(releaseStoreFile)
+            storePassword  releaseStorePassword
+            keyAlias releaseKeyAlias
+            keyPassword  releaseKeyPassword
+        }
+
+        debug {
+            storeFile rootProject.file(debugStoreFile)
+            storePassword  debugStorePassword
+            keyAlias debugKeyAlias
+            keyPassword  debugKeyPassword
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+
+        debug {
+            signingConfig signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+
+```
+
+
 
 
 
