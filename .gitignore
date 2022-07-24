@@ -60,3 +60,6 @@ firebase_app_id_file.json
 /macos/
 /windows/
 /linux/
+
+# Project specific app-configs
+/configs/*.json
