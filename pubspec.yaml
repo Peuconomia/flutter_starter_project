@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 0.0.1+1
 
 environment:
-  sdk: ">=2.17.5 <3.0.0"
+  sdk: ">=2.18.5 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -36,23 +36,23 @@ dependencies:
   intl: ^0.17.0
 
   # firebase
-  firebase_core: ^1.12.0
-  firebase_analytics: ^9.2.1
-  firebase_auth: ^3.5.0
-  cloud_firestore: ^3.4.0
-  cloud_functions: ^3.3.3
-  firebase_messaging: ^12.0.1
-  firebase_storage: ^10.3.3
-  firebase_crashlytics: ^2.5.3
-  firebase_dynamic_links: ^4.1.1
-  firebase_in_app_messaging: ^0.6.0+9
-  firebase_app_installations: ^0.1.0+8
-  firebase_performance: ^0.8.0+7
-  firebase_database: ^9.0.8
-  firebase_remote_config: ^2.0.2
+  firebase_core: ^2.3.0
+  firebase_analytics: ^10.0.6
+  firebase_auth: ^4.1.4
+  cloud_firestore: ^4.1.0
+  cloud_functions: ^4.0.5
+  firebase_messaging: ^14.1.2
+  firebase_storage: ^11.0.6
+  firebase_crashlytics: ^3.0.6
+  firebase_dynamic_links: ^5.0.6
+  firebase_in_app_messaging: ^0.7.0+7
+  firebase_app_installations: ^0.2.1+5
+  firebase_performance: ^0.9.0+6
+  firebase_database: ^10.0.6
+  firebase_remote_config: ^3.0.6
 
   # local notifications
-  flutter_local_notifications: ^9.7.0
+  flutter_local_notifications: ^12.0.4
 
   # annotations
   freezed_annotation: ^2.1.0
@@ -63,10 +63,10 @@ dependencies:
 
   # bloc
   flutter_bloc: ^8.0.1
-  hydrated_bloc: ^8.1.0
+  hydrated_bloc: ^9.0.0
 
   # auto routes
-  auto_route: ^4.2.1
+  auto_route: ^5.0.4
 
   # dio
   dio: ^4.0.4
@@ -112,18 +112,18 @@ dependencies:
   permission_handler: ^10.0.0
 
   # secure local storage
-  flutter_secure_storage: ^5.0.2
+  flutter_secure_storage: ^6.1.0
 
   # dependency_injections
   get_it: ^7.2.0
-  injectable: ^1.5.3
+  injectable: ^2.1.0
 
   # plus packages
-  package_info_plus: ^1.4.2
-  device_info_plus: ^4.0.0
+  package_info_plus: ^3.0.2
+  device_info_plus: ^8.0.0
 
   # connectivity test
-  internet_connection_checker: ^0.0.1+4
+  internet_connection_checker: ^1.0.0+1
 
   # location
   geolocator: ^9.0.1
@@ -161,8 +161,8 @@ dev_dependencies:
   json_serializable: ^6.3.1
 
   # generators
-  injectable_generator: ^1.5.4
-  auto_route_generator: ^4.2.0
+  injectable_generator: ^2.1.2
+  auto_route_generator: ^5.0.2
 
   # build runner
   build_runner: ^2.1.8
