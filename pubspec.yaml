@@ -52,7 +52,7 @@ dependencies:
   firebase_remote_config: ^3.0.6
 
   # local notifications
-  flutter_local_notifications: ^12.0.4
+  flutter_local_notifications: ^13.0.0
 
   # annotations
   freezed_annotation: ^2.1.0
@@ -66,10 +66,10 @@ dependencies:
   hydrated_bloc: ^9.0.0
 
   # auto routes
-  auto_route: ^5.0.4
+  auto_route: ^6.0.4
 
   # dio
-  dio: ^4.0.4
+  dio: ^5.1.0
   dio_cache_interceptor: ^3.2.6
   dio_cache_interceptor_hive_store: ^3.1.1
 
@@ -85,14 +85,14 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   # responsive ui builder
-  responsive_builder: ^0.4.2
+  responsive_builder: ^0.6.4
 
   # widgets
   smooth_page_indicator: ^1.0.0+2
   carousel_slider: ^4.1.1
   flutter_staggered_grid_view: ^0.6.2
   cached_network_image: ^3.2.1
-  webview_flutter: ^3.0.4
+  webview_flutter: ^4.0.7
   shimmer: ^2.0.0
 
   # native splash screens
@@ -103,16 +103,16 @@ dependencies:
 
   # media players
   video_player: ^2.4.5
-  audioplayers: ^1.0.1
+  audioplayers: ^3.0.1
 
   # svg support
-  flutter_svg: ^1.1.1+1
+  flutter_svg: ^2.0.4
 
   # permissions
   permission_handler: ^10.0.0
 
   # secure local storage
-  flutter_secure_storage: ^6.1.0
+  flutter_secure_storage: ^8.0.0
 
   # dependency_injections
   get_it: ^7.2.0
@@ -162,7 +162,7 @@ dev_dependencies:
 
   # generators
   injectable_generator: ^2.1.2
-  auto_route_generator: ^5.0.2
+  auto_route_generator: ^6.0.2
 
   # build runner
   build_runner: ^2.1.8
