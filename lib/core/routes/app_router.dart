@@ -1,11 +1,13 @@
-import 'package:app/features/home/presentation/widgets/pages/home.dart';
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 
-@MaterialAutoRouter(
-  replaceInRouteName: 'Page,Route',
-  routes: <AutoRoute>[
-    AutoRoute(page: HomePage, initial: true),
-  ],
-)
-// extend the generated private router
-class $AppRouter {}
+import '../../features/home/presentation/widgets/pages/home.dart';
+
+part 'app_router.gr.dart';
+
+@AutoRouterConfig(replaceInRouteName: 'Page|Screen,Route')
+class AppRouter extends _$AppRouter {
+  @override
+  List<AutoRoute> get routes => [
+        AutoRoute(page: HomeRoute.page, path: '/'),
+      ];
+}
