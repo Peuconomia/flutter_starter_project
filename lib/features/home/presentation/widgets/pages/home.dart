@@ -5,7 +5,7 @@ part 'home_mobile.dart';
 part 'home_tablet.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
