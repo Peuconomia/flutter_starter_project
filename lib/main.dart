@@ -13,20 +13,19 @@ import 'core/apps/device_preview_app.dart';
 import 'core/bloc_observers/bloc_observer.dart';
 import 'core/config_reader/config_reader.dart';
 import 'core/injections/injections.dart';
-import 'core/routes/app_router.gr.dart';
+import 'core/routes/app_router.dart';
 
 final appRouter = AppRouter();
 
 void main() async {
-  BlocOverrides.runZoned(
+  Bloc.observer = MyBlocObserver();
+
+  runZonedGuarded<Future<void>>(
     () async {
-      runZonedGuarded<Future<void>>(() async {
-        initAndRunApp();
-      },
-          (error, stack) => FirebaseCrashlytics.instance
-              .recordError(error, stack, fatal: true));
+      await initAndRunApp();
     },
-    blocObserver: MyBlocObserver(),
+    (error, stack) =>
+        FirebaseCrashlytics.instance.recordError(error, stack, fatal: true),
   );
 }
 
