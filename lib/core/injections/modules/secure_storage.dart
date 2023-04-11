@@ -9,7 +9,7 @@ abstract class SecureStorageModule {
           encryptedSharedPreferences: true,
         ),
         iOptions: IOSOptions(
-          accessibility: IOSAccessibility.first_unlock,
+          accessibility: KeychainAccessibility.first_unlock,
         ),
       );
 }
