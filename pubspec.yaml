@@ -56,7 +56,7 @@ dependencies:
 
   # annotations
   freezed_annotation: ^2.1.0
-  json_annotation: ^4.6.0
+  json_annotation: ^4.8.0
 
   # Equatable
   equatable: ^2.0.3
@@ -131,6 +131,8 @@ dependencies:
   # device preview
   device_preview: ^1.1.0
 
+  # fonts
+  google_fonts: ^3.0.1
 
 dev_dependencies:
   flutter_test:
@@ -187,6 +189,8 @@ flutter:
     - assets/images/splash-v31/
     - assets/svgs/
     - configs/
+    - fonts/poppins/
+    - fonts/proxima-nova/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
